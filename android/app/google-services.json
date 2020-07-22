@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1076878797856",
+    "firebase_url": "https://scanpay-c19b6.firebaseio.com",
+    "project_id": "scanpay-c19b6",
+    "storage_bucket": "scanpay-c19b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076878797856:android:f0cd002025a0351195a045",
+        "android_client_info": {
+          "package_name": "com.example.churchpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076878797856-945kruis2g6532he1tfl86cn5gsk5ld5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK9g_Aj5jSpNWqUSCeG8JRdpApJcbCzQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076878797856-945kruis2g6532he1tfl86cn5gsk5ld5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076878797856:android:d231701248a9c9d995a045",
+        "android_client_info": {
+          "package_name": "com.example.scanpay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076878797856-945kruis2g6532he1tfl86cn5gsk5ld5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK9g_Aj5jSpNWqUSCeG8JRdpApJcbCzQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076878797856-945kruis2g6532he1tfl86cn5gsk5ld5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
