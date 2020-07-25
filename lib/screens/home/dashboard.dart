@@ -1,4 +1,7 @@
-import 'package:churchpro/services/auth/auth_service.dart';
+import 'package:churchpro/screens/home/cart.dart';
+import 'package:churchpro/screens/home/home.dart';
+import 'package:churchpro/screens/home/profile.dart';
+import 'package:churchpro/screens/home/scan.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,41 +12,43 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-  AuthService _auth = AuthService();
   //default index of first screen
+  int _currentIndex = 0;
+  List<Widget> myPages = [
+    HomePage(),
+    ShoppingCart(),
+    ScanProduct(),
+    ProfilePage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<FirebaseUser>(context);
     print(user);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Dashboard'),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.person_outline),
-              onPressed: () async {
-                await _auth.signOut();
-              })
-        ],
-      ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            child: Text(user.email),
+      body: myPages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        elevation: 9.0,
+        selectedItemColor: Colors.green,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('home')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_basket), title: Text('shop')),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.camera),
+            title: Text('Scan'),
           ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline), title: Text('account')),
         ],
+        onTap: (index) {
+          setState(() {
+            index = _currentIndex;
+          });
+        },
       ),
-      // bottomNavigationBar: AnimatedBottomNavigationBar(
-      //   icons: iconList,
-      //   activeIndex: _bottomNavIndex,
-      //   gapLocation: GapLocation.center,
-      //   notchSmoothness: NotchSmoothness.verySmoothEdge,
-      //   leftCornerRadius: 32,
-      //   rightCornerRadius: 32,
-      //   onTap: (index) => setState(() => _bottomNavIndex = index),
-      //   //other params
-      // ),
     );
   }
 }
