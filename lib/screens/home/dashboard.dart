@@ -28,27 +28,39 @@ class _DashBoardState extends State<DashBoard> {
     return Scaffold(
       body: myPages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        elevation: 9.0,
-        selectedItemColor: Colors.green,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('home')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_basket), title: Text('shop')),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.camera),
-            title: Text('Scan'),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline), title: Text('account')),
-        ],
-        onTap: (index) {
-          setState(() {
-            index = _currentIndex;
-          });
-        },
-      ),
+          type: BottomNavigationBarType.fixed,
+          elevation: 9.0,
+          selectedItemColor: Colors.green,
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                ),
+                title: Text('home')),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.shopping_basket,
+                ),
+                title: Text('Cart')),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.camera,
+              ),
+              title: Text('Scan'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person_outline,
+              ),
+              title: Text('Account'),
+            ),
+          ]),
     );
   }
 }
