@@ -1,7 +1,10 @@
 import 'package:churchpro/modals/products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProductService {
+  //get current user
+  var currentUser = FirebaseAuth.instance.currentUser();
 //get data from product collection
   final CollectionReference productDectailCollection =
       Firestore.instance.collection('products');
@@ -19,7 +22,10 @@ class ProductService {
 
   //product collection details stream
   Stream<List<Products>> get products {
-    return productDectailCollection.snapshots().map((_productDetails));
+    return productDectailCollection
+        .where('productcode', isEqualTo: '03600045653')
+        .snapshots()
+        .map((_productDetails));
   }
 
   //create product collection;
