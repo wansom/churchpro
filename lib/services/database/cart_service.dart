@@ -20,7 +20,10 @@ class CartService {
 
   //product collection details stream
   Stream<List<ProductCart>> get products {
-    return cartDectailCollection.snapshots().map((_cartDetails));
+    return cartDectailCollection
+        .where('productcode', isEqualTo: '03600045653')
+        .snapshots()
+        .map((_cartDetails));
   }
 
   // //create product collection;

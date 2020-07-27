@@ -20,10 +20,11 @@ class ProductService {
     }).toList();
   }
 
+  String barcode = '03600045653';
   //product collection details stream
   Stream<List<Products>> get products {
     return productDectailCollection
-        .where('productcode', isEqualTo: '03600045653')
+        .where('productcode', isEqualTo: barcode)
         .snapshots()
         .map((_productDetails));
   }

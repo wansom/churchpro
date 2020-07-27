@@ -37,6 +37,7 @@ dependencies:
   barcode_scan: ^3.0.1
   flutter_spinkit: "^4.1.2"
   cloud_firestore: ^0.13.7
+  image_picker: ^0.6.7+4
   
 
 dev_dependencies:
