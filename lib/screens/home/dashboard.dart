@@ -20,6 +20,7 @@ class _DashBoardState extends State<DashBoard> {
     ScanProduct(),
     ProfilePage(),
   ];
+ 
 
   @override
   Widget build(BuildContext context) {
