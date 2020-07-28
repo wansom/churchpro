@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:churchpro/services/auth/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //instance of AuthService
+  AuthService _auth = AuthService();
   File sampleImage;
   String imageName = 'My Images';
-  
 
   Future getImage() async {
     // ignore: deprecated_member_use
@@ -30,6 +32,9 @@ class _HomePageState extends State<HomePage> {
       appBar: new AppBar(
         title: new Text('Image Upload'),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.person), onPressed: _auth.signOut),
+        ],
       ),
       body: new Center(
         child: sampleImage == null ? Text('Select an image') : enableUpload(),
