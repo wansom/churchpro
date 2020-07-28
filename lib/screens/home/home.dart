@@ -1,10 +1,8 @@
-import 'dart:io';
-
-import 'package:churchpro/services/auth/auth_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:churchpro/screens/home/superlist.dart';
+import 'package:churchpro/services/database/supermarket_service.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,65 +10,65 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //instance of AuthService
-  AuthService _auth = AuthService();
-  File sampleImage;
-  String imageName = 'My Images';
-
-  Future getImage() async {
-    // ignore: deprecated_member_use
-    var tempImage = await ImagePicker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      sampleImage = tempImage;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Image Upload'),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.person), onPressed: _auth.signOut),
-        ],
-      ),
-      body: new Center(
-        child: sampleImage == null ? Text('Select an image') : enableUpload(),
-      ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: getImage,
-        tooltip: 'Add Image',
-        child: new Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-
-  Widget enableUpload() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Image.file(sampleImage, height: 300.0, width: 300.0),
-          RaisedButton(
-              elevation: 7.0,
-              child: Text('Upload'),
-              textColor: Colors.white,
-              color: Colors.blue,
-              onPressed: () async {
-                final StorageReference firebaseStorageRef =
-                    FirebaseStorage.instance.ref().child(imageName);
-                final StorageTaskSnapshot snapshot =
-                    await firebaseStorageRef.putFile(sampleImage).onComplete;
-                if (snapshot.error == null) {
-                  final String downloadUrl =
-                      await snapshot.ref.getDownloadURL();
-                  await Firestore.instance
-                      .collection("cart")
-                      .add({"url": downloadUrl, "name": imageName});
-                }
-              }),
-        ],
+    return StreamProvider.value(
+      value: SuperService().supermarkets,
+      child: Scaffold(
+        body: SafeArea(
+            child: ListView(
+          children: <Widget>[
+            SizedBox(height: 20.0),
+            Padding(
+              padding: EdgeInsets.only(left: 15.0, right: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    height: 40.0,
+                    width: 40.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(7.0),
+                        image: DecorationImage(
+                            image: AssetImage('assets/tuxedo.png'),
+                            fit: BoxFit.cover)),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.notifications),
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Padding(
+                padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                child: Container(
+                    padding: EdgeInsets.only(left: 5.0),
+                    decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10.0)),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          hintText: 'Search',
+                          hintStyle: GoogleFonts.notoSans(fontSize: 14.0),
+                          border: InputBorder.none,
+                          fillColor: Colors.grey.withOpacity(0.5),
+                          prefixIcon: Icon(Icons.search, color: Colors.grey)),
+                    ))),
+            SizedBox(height: 7.0),
+            Padding(
+                padding: EdgeInsets.only(left: 20.0),
+                child: Text('Supermarkets',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 17.0))),
+            SizedBox(height: 20.0),
+            SuperList(),
+          ],
+        )),
       ),
     );
   }

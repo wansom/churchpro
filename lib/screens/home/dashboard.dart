@@ -1,3 +1,4 @@
+import 'package:churchpro/screens/home/AddProducts.dart';
 import 'package:churchpro/screens/home/cart.dart';
 import 'package:churchpro/screens/home/home.dart';
 import 'package:churchpro/screens/home/profile.dart';
@@ -19,8 +20,8 @@ class _DashBoardState extends State<DashBoard> {
     ShoppingCart(),
     ScanProduct(),
     ProfilePage(),
+    AddProducts(),
   ];
- 
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +61,12 @@ class _DashBoardState extends State<DashBoard> {
                 Icons.person_outline,
               ),
               title: Text('Account'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.add,
+              ),
+              title: Text('Admin'),
             ),
           ]),
     );

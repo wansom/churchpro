@@ -12,21 +12,20 @@ class ProductService {
   List<Products> _productDetails(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Products(
-        productcode: doc.data['productcode'] ?? '',
-        productinfo: doc.data['productinfo'] ?? '',
-        productname: doc.data['productname'] ?? '',
-        productprice: doc.data['productprice'] ?? '',
+        productcode: doc.data['store'] ?? '',
+        productinfo: doc.data['supername'] ?? '',
+        productname: doc.data['supermarkert'] ?? '',
+        productprice: doc.data['store'] ?? '',
+        imageurl: doc.data['imageurl'] ?? '',
+        isfavorite: doc['isfavorite'] ?? false,
+        isfeatured: doc['isfeatured'] ?? true,
       );
     }).toList();
   }
 
-  String barcode = '03600045653';
   //product collection details stream
   Stream<List<Products>> get products {
-    return productDectailCollection
-        .where('productcode', isEqualTo: barcode)
-        .snapshots()
-        .map((_productDetails));
+    return productDectailCollection.snapshots().map((_productDetails));
   }
 
   //create product collection;
