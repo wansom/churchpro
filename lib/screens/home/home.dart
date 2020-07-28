@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,6 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   File sampleImage;
+  String imageName = 'My Images';
 
   Future getImage() async {
     // ignore: deprecated_member_use
@@ -45,17 +47,23 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Image.file(sampleImage, height: 300.0, width: 300.0),
           RaisedButton(
-            elevation: 7.0,
-            child: Text('Upload'),
-            textColor: Colors.white,
-            color: Colors.blue,
-            onPressed: () {
-              final StorageReference firebaseStorageRef =
-                  FirebaseStorage.instance.ref().child('myimage.jpg');
-              //final StorageUploadTask task =
-              firebaseStorageRef.putFile(sampleImage);
-            },
-          )
+              elevation: 7.0,
+              child: Text('Upload'),
+              textColor: Colors.white,
+              color: Colors.blue,
+              onPressed: () async {
+                final StorageReference firebaseStorageRef =
+                    FirebaseStorage.instance.ref().child(imageName);
+                final StorageTaskSnapshot snapshot =
+                    await firebaseStorageRef.putFile(sampleImage).onComplete;
+                if (snapshot.error == null) {
+                  final String downloadUrl =
+                      await snapshot.ref.getDownloadURL();
+                  await Firestore.instance
+                      .collection("cart")
+                      .add({"url": downloadUrl, "name": imageName});
+                }
+              }),
         ],
       ),
     );
