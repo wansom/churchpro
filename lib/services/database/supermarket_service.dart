@@ -19,6 +19,10 @@ class SuperService {
     return superCollection.snapshots().map((_superDetails));
   }
 
+  Stream<List<Supermarkets>> get mySupermarkets {
+    return superCollection.snapshots().map((_superDetails));
+  }
+
   //adding supermarkets
   void addSupermarket(superData) async {
     superCollection.add(superData);

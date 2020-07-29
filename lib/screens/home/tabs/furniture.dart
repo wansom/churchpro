@@ -2,21 +2,18 @@ import 'package:churchpro/screens/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Food extends StatefulWidget {
-  // final ValueSetter<Products> _valueSetter;
-
-  // Food(this._valueSetter);
+class Furniture extends StatefulWidget {
   @override
-  _FoodState createState() => _FoodState();
+  _FurnitureState createState() => _FurnitureState();
 }
 
-class _FoodState extends State<Food> {
+class _FurnitureState extends State<Furniture> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
             .collection('products')
-            .where('category', isEqualTo: 'food')
+            .where('category', isEqualTo: 'furniture')
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {

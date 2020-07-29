@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:churchpro/services/auth/auth_service.dart';
 import 'package:churchpro/shared/constansts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddProducts extends StatefulWidget {
@@ -18,9 +20,11 @@ class _AddProductsState extends State<AddProducts> {
   File sampleImage;
   String productname = '';
   String productprice = '';
+  String productinfo = '';
   bool isfavorite = false;
   bool isfeatured = false;
   String selectedsupermarket;
+  String barcodeResult = '';
   List<String> listedsupermarkets = [
     'naivas',
     'uchumi',
@@ -30,8 +34,15 @@ class _AddProductsState extends State<AddProducts> {
     'tuskys',
     'carrefour'
   ];
-  //String _currentSugars;
-
+  String selectedCategory;
+  List<String> myCategories = [
+    'electronics',
+    'fashion',
+    'furniture',
+    'food',
+    'cutlery',
+  ];
+  ScanResult barcode;
   final _formkey = GlobalKey<FormState>();
 
   Future getImage() async {
@@ -95,6 +106,29 @@ class _AddProductsState extends State<AddProducts> {
                   });
                 },
               ),
+              TextFormField(
+                decoration: decoration.copyWith(labelText: 'Description'),
+                onChanged: (value) {
+                  setState(() {
+                    productinfo = value;
+                  });
+                },
+              ),
+              DropdownButtonFormField(
+                value: selectedCategory ?? 'electronics',
+                decoration: decoration,
+                items: myCategories.map((sugar) {
+                  return DropdownMenuItem(
+                    value: sugar,
+                    child: Text('$sugar Category'),
+                  );
+                }).toList(),
+                onChanged: (val) => setState(() => selectedCategory = val),
+              ),
+              RaisedButton(
+                onPressed: scanMe,
+                child: Text('Scan Code'),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
@@ -117,15 +151,37 @@ class _AddProductsState extends State<AddProducts> {
       child: Column(
         children: <Widget>[
           Image.file(sampleImage, height: 300.0, width: 300.0),
+          SizedBox(
+            height: 3.0,
+          ),
           Text(productname),
+          SizedBox(
+            height: 3.0,
+          ),
           Text(productprice),
+          SizedBox(
+            height: 3.0,
+          ),
           Text(selectedsupermarket),
+          SizedBox(
+            height: 3.0,
+          ),
+          Text(selectedCategory),
+          SizedBox(
+            height: 3.0,
+          ),
+          Text(barcodeResult),
           RaisedButton(
               elevation: 7.0,
               child: Text('Upload'),
               textColor: Colors.white,
               color: Colors.blue,
               onPressed: () async {
+                if (barcode != null) {
+                  setState(() {
+                    barcodeResult = barcode.rawContent ?? 'none';
+                  });
+                }
                 final StorageReference firebaseStorageRef =
                     FirebaseStorage.instance.ref().child(productname);
                 final StorageTaskSnapshot snapshot =
@@ -140,11 +196,26 @@ class _AddProductsState extends State<AddProducts> {
                     'isfavorite': isfavorite,
                     'isfeatured': isfeatured,
                     'supermarkert': selectedsupermarket,
+                    'category': selectedCategory,
+                    'productcode': barcodeResult,
+                    'productinfo': productinfo,
                   });
                 }
               }),
         ],
       ),
     );
+  }
+
+  //scan function
+  Future scanMe() async {
+    try {
+      ScanResult result = await BarcodeScanner.scan();
+      setState(() {
+        barcode = result;
+      });
+    } on PlatformException catch (e) {
+      print(e);
+    }
   }
 }

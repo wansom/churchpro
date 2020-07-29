@@ -1,6 +1,7 @@
 import 'package:churchpro/screens/home/tabs/electronic.dart';
 import 'package:churchpro/screens/home/tabs/fashion.dart';
 import 'package:churchpro/screens/home/tabs/food.dart';
+import 'package:churchpro/screens/home/tabs/furniture.dart';
 import 'package:flutter/material.dart';
 import 'package:churchpro/modals/products.dart';
 
@@ -19,7 +20,7 @@ class _SuperDetailState extends State<SuperDetail>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -88,22 +89,22 @@ class _SuperDetailState extends State<SuperDetail>
                           fontSize: 21.0,
                         )),
                   ),
+                  Tab(
+                    child: Text('Furniture',
+                        style: TextStyle(
+                          fontFamily: 'Varela',
+                          fontSize: 21.0,
+                        )),
+                  ),
                 ]),
             Container(
                 height: MediaQuery.of(context).size.height - 50.0,
                 width: double.infinity,
                 child: TabBarView(controller: _tabController, children: [
-                  Electronics((selectedProduct) {
-                    setState(() {
-                      cart.add(selectedProduct);
-                      sum = 0;
-                      cart.forEach((item) {
-                        sum = sum + item.productprice;
-                      });
-                    });
-                  }),
-                  Food(),
+                  Electronics(),
                   Fashion(),
+                  Food(),
+                  Furniture(),
                 ]))
           ],
         ),

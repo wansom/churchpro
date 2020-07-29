@@ -1,13 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:churchpro/modals/products.dart';
-import 'package:churchpro/services/database/products_service.dart';
+
 import 'package:churchpro/screens/loading.dart';
 
 class Electronics extends StatefulWidget {
-  final ValueSetter<Products> _valueSetter;
-
-  Electronics(this._valueSetter);
-
   @override
   _ElectronicsState createState() => _ElectronicsState();
 }
@@ -15,11 +11,14 @@ class Electronics extends StatefulWidget {
 class _ElectronicsState extends State<Electronics> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<Products>>(
-        stream: ProductService().products,
+    return StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance
+            .collection('products')
+            .where('category', isEqualTo: 'electronics')
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            var productData = snapshot.data;
+            var mysnapshot = snapshot.data;
             return Container(
               padding: EdgeInsets.only(right: 15.0),
               width: MediaQuery.of(context).size.width - 30.0,
@@ -27,20 +26,14 @@ class _ElectronicsState extends State<Electronics> {
               child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
-                  itemCount: productData.length,
+                  itemCount: mysnapshot.documents.length,
                   itemBuilder: (BuildContext context, int index) {
+                    DocumentSnapshot products = mysnapshot.documents[index];
                     return Padding(
                         padding: EdgeInsets.only(
                             top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
                         child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/cart', arguments: {
-                                'productName': productData[index].productinfo,
-                                'productImage': productData[index].productcode,
-                                'productPrice': productData[index].productprice,
-                              });
-                              widget._valueSetter(productData[index]);
-                            },
+                            onTap: addtoCart,
                             child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15.0),
@@ -58,7 +51,7 @@ class _ElectronicsState extends State<Electronics> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
-                                            productData[index].isfavorite
+                                            products['isfavorite']
                                                 ? Icon(Icons.favorite,
                                                     color: Color(0xFFFE7D6A))
                                                 : Icon(Icons.favorite_border,
@@ -69,11 +62,11 @@ class _ElectronicsState extends State<Electronics> {
                                       width: 75.0,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
-                                              image: AssetImage(
-                                                  productData[index].imageurl),
+                                              image: NetworkImage(
+                                                  products['imageurl']),
                                               fit: BoxFit.contain))),
                                   SizedBox(height: 3.0),
-                                  Text('${productData[index].productprice}',
+                                  Text('${products["productprice"]}',
                                       style: TextStyle(
                                           color: Color(0xFFFE7D6A),
                                           fontFamily: 'Varela',
@@ -90,8 +83,7 @@ class _ElectronicsState extends State<Electronics> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            if (!productData[index]
-                                                .isfeatured) ...[
+                                            if (!products['isfeatured']) ...[
                                               Icon(Icons.shopping_basket,
                                                   color: Color(0xFFD17E50),
                                                   size: 12.0),
@@ -101,8 +93,7 @@ class _ElectronicsState extends State<Electronics> {
                                                       color: Color(0xFFFE7D6A),
                                                       fontSize: 12.0))
                                             ],
-                                            if (productData[index]
-                                                .isfeatured) ...[
+                                            if (products['isfeatured']) ...[
                                               Icon(Icons.remove_circle_outline,
                                                   color: Color(0xFFFE7D6A),
                                                   size: 12.0),
@@ -122,10 +113,10 @@ class _ElectronicsState extends State<Electronics> {
                   }),
             );
           } else {
-            return Container(
-              child: Loading(),
-            );
+            return Loading();
           }
         });
   }
+
+  addtoCart() {}
 }
