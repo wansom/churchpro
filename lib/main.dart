@@ -1,4 +1,5 @@
 import 'package:churchpro/app.dart';
+import 'package:churchpro/screens/home/product_details.dart';
 import 'package:churchpro/screens/home/superdetail.dart';
 import 'package:churchpro/services/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => MyHomePage(),
           '/superdetail': (context) => SuperDetail(),
+          '/productdetails': (context) => ProductDetail(),
         },
       ),
     );

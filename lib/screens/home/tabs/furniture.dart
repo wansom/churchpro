@@ -32,7 +32,17 @@ class _FurnitureState extends State<Furniture> {
                         padding: EdgeInsets.only(
                             top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
                         child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(context, '/productdetails',
+                                  arguments: ({
+                                    'selectedName': products['productname'],
+                                    'selectedPrice': products['productprice'],
+                                    'selectedImage': products['imageurl'],
+                                    'selectedInfo': products['productinfo'],
+                                    'selectedSupermarket':
+                                        products['supermarkert'],
+                                  }));
+                            },
                             child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15.0),

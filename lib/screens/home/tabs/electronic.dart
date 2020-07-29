@@ -33,7 +33,17 @@ class _ElectronicsState extends State<Electronics> {
                         padding: EdgeInsets.only(
                             top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
                         child: InkWell(
-                            onTap: addtoCart,
+                            onTap: () {
+                              Navigator.pushNamed(context, '/productdetails',
+                                  arguments: ({
+                                    'selectedName': products['productname'],
+                                    'selectedPrice': products['productprice'],
+                                    'selectedImage': products['imageurl'],
+                                    'selectedInfo': products['productinfo'],
+                                    'selectedSupermarket':
+                                        products['supermarkert'],
+                                  }));
+                            },
                             child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15.0),
@@ -87,7 +97,7 @@ class _ElectronicsState extends State<Electronics> {
                                               Icon(Icons.shopping_basket,
                                                   color: Color(0xFFD17E50),
                                                   size: 12.0),
-                                              Text('Add to cart',
+                                              Text('View Details',
                                                   style: TextStyle(
                                                       fontFamily: 'Varela',
                                                       color: Color(0xFFFE7D6A),
@@ -117,6 +127,4 @@ class _ElectronicsState extends State<Electronics> {
           }
         });
   }
-
-  addtoCart() {}
 }
