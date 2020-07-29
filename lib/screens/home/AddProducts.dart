@@ -135,8 +135,8 @@ class _AddProductsState extends State<AddProducts> {
                       await snapshot.ref.getDownloadURL();
                   Firestore.instance.collection('products').add({
                     "imageurl": downloadUrl,
-                    "supername": productname,
-                    'store': productprice,
+                    "productname": productname,
+                    'productprice': productprice,
                     'isfavorite': isfavorite,
                     'isfeatured': isfeatured,
                     'supermarkert': selectedsupermarket,

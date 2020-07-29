@@ -5,6 +5,7 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height / 4,
       child: Center(
         child: SpinKitSquareCircle(
           color: Colors.green,

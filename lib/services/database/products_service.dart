@@ -12,10 +12,10 @@ class ProductService {
   List<Products> _productDetails(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Products(
-        productcode: doc.data['store'] ?? '',
-        productinfo: doc.data['supername'] ?? '',
-        productname: doc.data['supermarkert'] ?? '',
-        productprice: doc.data['store'] ?? '',
+        productcode: doc.data['productcode'] ?? '',
+        productinfo: doc.data['productinfo'] ?? '',
+        productname: doc.data['productname'] ?? '',
+        productprice: doc.data['productprice'] ?? '',
         imageurl: doc.data['imageurl'] ?? '',
         isfavorite: doc['isfavorite'] ?? false,
         isfeatured: doc['isfeatured'] ?? true,
