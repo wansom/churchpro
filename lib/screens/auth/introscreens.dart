@@ -41,21 +41,21 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           title: "Welcome to ScanPay",
           body:
               "Avoid long Queues,Scan products via our app and pay using Mpesa",
-          image: _buildImage('screen'),
+          image: _buildImage('screen1'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Make the scan",
           body:
               "Scan any product from the shelf and it will be added to your cart.Changed your mind?just rescan",
-          image: _buildImage('scan'),
+          image: _buildImage('screen2'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Digital payments",
           body:
               "Pay for items in your cart using Mpesa or shopping card.Your digital receipt will be processed instantly",
-          image: _buildImage('pay'),
+          image: _buildImage('screen3'),
           decoration: pageDecoration,
         ),
         PageViewModel(

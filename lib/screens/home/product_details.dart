@@ -157,9 +157,9 @@ class _ProductDetailState extends State<ProductDetail> {
                             color: Color(0xFFFFF2D5)))
                   ])),
               decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.only(topLeft: Radius.circular(30.0)),
-                  color: Color(0xFFFE6D2E)),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0)),
+                color: Color(0xFFFFE3DF),
+              ),
             )),
         Align(
           alignment: Alignment.topLeft,
@@ -203,7 +203,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     color: Color(0xFFA4B2AE),
                     borderRadius: BorderRadius.circular(20.0)),
                 child: Center(
-                    child: Text('Explore Programs',
+                    child: Text('Explore Pro',
                         style: GoogleFonts.sourceSansPro(
                             fontSize: 14.0,
                             fontWeight: FontWeight.w500,
