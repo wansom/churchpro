@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                           fillColor: Colors.grey.withOpacity(0.5),
                           prefixIcon: Icon(Icons.search, color: Colors.grey)),
                     ))),
-            SizedBox(height: 7.0),
+            SizedBox(height: 30.0),
             Padding(
                 padding: EdgeInsets.only(left: 20.0),
                 child: Text('Supermarkets',

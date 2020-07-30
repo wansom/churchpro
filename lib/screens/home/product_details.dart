@@ -150,7 +150,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
                             color: Color(0xFFFFF2D5))),
-                    Text('Availability',
+                    Text('Available',
                         style: GoogleFonts.sourceSansPro(
                             fontSize: 12.0,
                             fontWeight: FontWeight.w500,
@@ -158,7 +158,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ])),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0)),
-                color: Color(0xFFFFE3DF),
+                color: Colors.green,
               ),
             )),
         Align(
@@ -203,7 +203,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     color: Color(0xFFA4B2AE),
                     borderRadius: BorderRadius.circular(20.0)),
                 child: Center(
-                    child: Text('Explore Pro',
+                    child: Text('Explore Products',
                         style: GoogleFonts.sourceSansPro(
                             fontSize: 14.0,
                             fontWeight: FontWeight.w500,
