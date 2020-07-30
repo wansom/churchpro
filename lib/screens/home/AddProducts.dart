@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:churchpro/services/auth/auth_service.dart';
 import 'package:churchpro/shared/constansts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -16,7 +15,7 @@ class AddProducts extends StatefulWidget {
 
 class _AddProductsState extends State<AddProducts> {
   //instance of AuthService
-  AuthService _auth = AuthService();
+
   File sampleImage;
   String productname = '';
   String productprice = '';
@@ -57,13 +56,6 @@ class _AddProductsState extends State<AddProducts> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Image Upload'),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.person), onPressed: _auth.signOut),
-        ],
-      ),
       body: new SafeArea(
         child: sampleImage == null ? addProducts() : enableUpload(),
       ),
@@ -71,79 +63,258 @@ class _AddProductsState extends State<AddProducts> {
   }
 
   Widget addProducts() {
-    return ListView(
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    return Stack(
       children: <Widget>[
-        Form(
-          key: _formkey,
-          child: Column(
-            children: <Widget>[
-              DropdownButtonFormField(
-                value: selectedsupermarket ?? 'naivas',
-                decoration: decoration,
-                items: listedsupermarkets.map((sugar) {
-                  return DropdownMenuItem(
-                    value: sugar,
-                    child: Text('$sugar supermarket'),
-                  );
-                }).toList(),
-                onChanged: (val) => setState(() => selectedsupermarket = val),
-              ),
-              SizedBox(height: 10.0),
-              TextFormField(
-                decoration: decoration.copyWith(labelText: 'product name'),
-                onChanged: (value) {
-                  setState(() {
-                    productname = value;
-                  });
-                },
-              ),
-              SizedBox(height: 5.0),
-              TextFormField(
-                decoration: decoration.copyWith(labelText: 'Price'),
-                onChanged: (value) {
-                  setState(() {
-                    productprice = value;
-                  });
-                },
-              ),
-              TextFormField(
-                decoration: decoration.copyWith(labelText: 'Description'),
-                onChanged: (value) {
-                  setState(() {
-                    productinfo = value;
-                  });
-                },
-              ),
-              DropdownButtonFormField(
-                value: selectedCategory ?? 'electronics',
-                decoration: decoration,
-                items: myCategories.map((sugar) {
-                  return DropdownMenuItem(
-                    value: sugar,
-                    child: Text('$sugar Category'),
-                  );
-                }).toList(),
-                onChanged: (val) => setState(() => selectedCategory = val),
-              ),
-              RaisedButton(
-                onPressed: scanMe,
-                child: Text('Scan Code'),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text('Select Image'),
-                  IconButton(
-                    icon: Icon(Icons.image),
-                    onPressed: getImage,
-                  ),
-                ],
-              )
-            ],
+        Container(
+          height: 225.0,
+          color: Color(0xFF20D3D2),
+        ),
+        Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: IconButton(
+                icon: Icon(Icons.arrow_back),
+                color: Colors.white,
+                onPressed: () {}),
           ),
         ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: Text(
+                'Add Product',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              )),
+        ),
+        Positioned(
+          top: 100.0,
+          child: Container(
+            height: screenHeight - 100.0,
+            width: screenWidth,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40.0),
+                    topRight: Radius.circular(40.0))),
+            child: ListView(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                  child: Container(
+                    width: screenWidth - 40.0,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: screenHeight - 100,
+                          width: screenWidth,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            color: Color(0xFF20D3D2),
+                          ),
+                          child: ListView(
+                            children: <Widget>[
+                              Form(
+                                key: _formkey,
+                                child: Column(
+                                  children: <Widget>[
+                                    DropdownButtonFormField(
+                                      value: selectedsupermarket ?? 'naivas',
+                                      decoration: decoration,
+                                      items: listedsupermarkets.map((sugar) {
+                                        return DropdownMenuItem(
+                                          value: sugar,
+                                          child: Text('$sugar supermarket'),
+                                        );
+                                      }).toList(),
+                                      onChanged: (val) => setState(
+                                          () => selectedsupermarket = val),
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextFormField(
+                                      decoration: decoration.copyWith(
+                                          labelText: 'product name'),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          productname = value;
+                                        });
+                                      },
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    TextFormField(
+                                      decoration: decoration.copyWith(
+                                          labelText: 'Price'),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          productprice = value;
+                                        });
+                                      },
+                                    ),
+                                    TextFormField(
+                                      decoration: decoration.copyWith(
+                                          labelText: 'Description'),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          productinfo = value;
+                                        });
+                                      },
+                                    ),
+                                    DropdownButtonFormField(
+                                      value: selectedCategory ?? 'electronics',
+                                      decoration: decoration,
+                                      items: myCategories.map((sugar) {
+                                        return DropdownMenuItem(
+                                          value: sugar,
+                                          child: Text('$sugar Category'),
+                                        );
+                                      }).toList(),
+                                      onChanged: (val) => setState(
+                                          () => selectedCategory = val),
+                                    ),
+                                    Container(
+                                        height: 40.0,
+                                        width: 105.0,
+                                        child: Material(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          shadowColor: Colors.greenAccent,
+                                          color: Colors.green,
+                                          elevation: 7.0,
+                                          child: GestureDetector(
+                                            onTap: scanMe,
+                                            child: Center(
+                                              child: Text(
+                                                'Scan Code',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: 'Montserrat',
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )),
+                                    SizedBox(height: 5.0),
+                                    Container(
+                                        height: 40.0,
+                                        width: 105.0,
+                                        child: Material(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          shadowColor: Colors.greenAccent,
+                                          color: Colors.green,
+                                          elevation: 7.0,
+                                          child: GestureDetector(
+                                            onTap: getImage,
+                                            child: Center(
+                                              child: Text(
+                                                'Select Image',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: 'Montserrat',
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
       ],
     );
+    // return ListView(
+    //   children: <Widget>[
+    //     Form(
+    //       key: _formkey,
+    //       child: Column(
+    //         children: <Widget>[
+    //           DropdownButtonFormField(
+    //             value: selectedsupermarket ?? 'naivas',
+    //             decoration: decoration,
+    //             items: listedsupermarkets.map((sugar) {
+    //               return DropdownMenuItem(
+    //                 value: sugar,
+    //                 child: Text('$sugar supermarket'),
+    //               );
+    //             }).toList(),
+    //             onChanged: (val) => setState(() => selectedsupermarket = val),
+    //           ),
+    //           SizedBox(height: 10.0),
+    //           TextFormField(
+    //             decoration: decoration.copyWith(labelText: 'product name'),
+    //             onChanged: (value) {
+    //               setState(() {
+    //                 productname = value;
+    //               });
+    //             },
+    //           ),
+    //           SizedBox(height: 5.0),
+    //           TextFormField(
+    //             decoration: decoration.copyWith(labelText: 'Price'),
+    //             onChanged: (value) {
+    //               setState(() {
+    //                 productprice = value;
+    //               });
+    //             },
+    //           ),
+    //           TextFormField(
+    //             decoration: decoration.copyWith(labelText: 'Description'),
+    //             onChanged: (value) {
+    //               setState(() {
+    //                 productinfo = value;
+    //               });
+    //             },
+    //           ),
+    //           DropdownButtonFormField(
+    //             value: selectedCategory ?? 'electronics',
+    //             decoration: decoration,
+    //             items: myCategories.map((sugar) {
+    //               return DropdownMenuItem(
+    //                 value: sugar,
+    //                 child: Text('$sugar Category'),
+    //               );
+    //             }).toList(),
+    //             onChanged: (val) => setState(() => selectedCategory = val),
+    //           ),
+    //           RaisedButton(
+    //             onPressed: scanMe,
+    //             child: Text('Scan Code'),
+    //           ),
+    //           Row(
+    //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //             children: <Widget>[
+    //               Text('Select Image'),
+    //               IconButton(
+    //                 icon: Icon(Icons.image),
+    //                 onPressed: getImage,
+    //               ),
+    //             ],
+    //           )
+    //         ],
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
 
   Widget enableUpload() {

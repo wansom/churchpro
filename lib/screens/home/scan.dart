@@ -244,26 +244,14 @@ class _ScanProductState extends State<ScanProduct> {
           ],
         );
       } else {
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(70.0, 0.0, 0.0, 0.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('Scan to see results'),
-              SizedBox(
-                height: 20.0,
-              ),
-              RaisedButton(onPressed: scanMe, child: Icon(Icons.camera)),
-            ],
-          ),
-        );
+        return noScanResult();
       }
     }
 
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: notScanned ? myText() : Text('helo'),
+          child: notScanned ? myText() : noScanResult(),
         ),
       ),
     );
@@ -332,5 +320,91 @@ class _ScanProductState extends State<ScanProduct> {
           }
         });
     }
+  }
+
+  noScanResult() {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    return Stack(
+      children: <Widget>[
+        Container(
+          height: 225.0,
+          color: Color(0xFF20D3D2),
+        ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: IconButton(
+              icon: Icon(Icons.refresh),
+              iconSize: 50.0,
+              color: Colors.white,
+              onPressed: toggleView,
+            ),
+          ),
+        ),
+        Positioned(
+          top: 190.0,
+          child: Container(
+            height: screenHeight - 190.0,
+            width: screenWidth,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40.0),
+                    topRight: Radius.circular(40.0))),
+            child: ListView(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 30.0, left: 20.0, right: 20.0, bottom: 10.0),
+                  child: Container(
+                    width: screenWidth - 40.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        InkWell(
+                          onTap: scanMe,
+                          child: Container(
+                            height: 80.0,
+                            width: 150.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.0),
+                              color: Color(0xFF20D3D2),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Scan',
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 24.0,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: 20.0, right: 20.0, bottom: 10.0, top: 5.0),
+                  child: Text(
+                    'Click the refresh button to see Item details',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16.0,
+                        color: Color(0xFFBBBBBB)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
   }
 }

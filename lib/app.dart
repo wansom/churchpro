@@ -1,4 +1,4 @@
-import 'package:churchpro/screens/auth/authenticate.dart';
+import 'package:churchpro/screens/auth/introscreens.dart';
 import 'package:churchpro/screens/home/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final user = Provider.of<FirebaseUser>(context);
 
     if (user == null) {
-      return Authenticate();
+      return OnBoardingPage();
     } else {
       return DashBoard();
     }

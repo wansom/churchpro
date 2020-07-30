@@ -4,6 +4,6 @@ const decoration = InputDecoration(
     labelStyle: TextStyle(
         fontFamily: 'Montserrat',
         fontWeight: FontWeight.bold,
-        color: Colors.grey),
+        color: Colors.white),
     focusedBorder:
-        UnderlineInputBorder(borderSide: BorderSide(color: Colors.green)));
+        UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)));
