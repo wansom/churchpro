@@ -1,6 +1,7 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:churchpro/services/database/cart_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -232,7 +233,17 @@ class _ScanProductState extends State<ScanProduct> {
                               color: Colors.white,
                               fontWeight: FontWeight.w400),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          var firebaseUser =
+                              await FirebaseAuth.instance.currentUser();
+                          Firestore.instance.collection('cart').add({
+                            'productname': resultName,
+                            'productcode': resultCode,
+                            'productinfo': resultInfo,
+                            'imageurl': resultImage,
+                            'productprice': resultPrice,
+                            'productowner': firebaseUser.uid,
+                          });
                           setState(() {
                             quant++;
                           });

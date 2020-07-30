@@ -109,7 +109,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                     color: Colors.green,
                                     elevation: 7.0,
                                     child: GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, '/updateprofile');
+                                      },
                                       child: Center(
                                         child: Text(
                                           'Edit Profile',

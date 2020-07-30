@@ -44,11 +44,14 @@ class _ProductDetailState extends State<ProductDetail> {
                             style: GoogleFonts.tinos(
                                 fontSize: 25.0, fontWeight: FontWeight.w500)),
                         SizedBox(height: 7.0),
-                        Text(selectedProduct['selectedSupermarket'],
-                            style: GoogleFonts.sourceSansPro(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xFF5E5B54))),
+                        Text(
+                          selectedProduct['selectedSupermarket'],
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFFFE7D6A),
+                          ),
+                        ),
                         SizedBox(height: 7.0),
                         Row(
                           children: <Widget>[

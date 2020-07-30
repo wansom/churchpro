@@ -242,79 +242,6 @@ class _AddProductsState extends State<AddProducts> {
         )
       ],
     );
-    // return ListView(
-    //   children: <Widget>[
-    //     Form(
-    //       key: _formkey,
-    //       child: Column(
-    //         children: <Widget>[
-    //           DropdownButtonFormField(
-    //             value: selectedsupermarket ?? 'naivas',
-    //             decoration: decoration,
-    //             items: listedsupermarkets.map((sugar) {
-    //               return DropdownMenuItem(
-    //                 value: sugar,
-    //                 child: Text('$sugar supermarket'),
-    //               );
-    //             }).toList(),
-    //             onChanged: (val) => setState(() => selectedsupermarket = val),
-    //           ),
-    //           SizedBox(height: 10.0),
-    //           TextFormField(
-    //             decoration: decoration.copyWith(labelText: 'product name'),
-    //             onChanged: (value) {
-    //               setState(() {
-    //                 productname = value;
-    //               });
-    //             },
-    //           ),
-    //           SizedBox(height: 5.0),
-    //           TextFormField(
-    //             decoration: decoration.copyWith(labelText: 'Price'),
-    //             onChanged: (value) {
-    //               setState(() {
-    //                 productprice = value;
-    //               });
-    //             },
-    //           ),
-    //           TextFormField(
-    //             decoration: decoration.copyWith(labelText: 'Description'),
-    //             onChanged: (value) {
-    //               setState(() {
-    //                 productinfo = value;
-    //               });
-    //             },
-    //           ),
-    //           DropdownButtonFormField(
-    //             value: selectedCategory ?? 'electronics',
-    //             decoration: decoration,
-    //             items: myCategories.map((sugar) {
-    //               return DropdownMenuItem(
-    //                 value: sugar,
-    //                 child: Text('$sugar Category'),
-    //               );
-    //             }).toList(),
-    //             onChanged: (val) => setState(() => selectedCategory = val),
-    //           ),
-    //           RaisedButton(
-    //             onPressed: scanMe,
-    //             child: Text('Scan Code'),
-    //           ),
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //             children: <Widget>[
-    //               Text('Select Image'),
-    //               IconButton(
-    //                 icon: Icon(Icons.image),
-    //                 onPressed: getImage,
-    //               ),
-    //             ],
-    //           )
-    //         ],
-    //       ),
-    //     ),
-    //   ],
-    // );
   }
 
   Widget enableUpload() {
@@ -343,36 +270,36 @@ class _AddProductsState extends State<AddProducts> {
           ),
           Text(barcodeResult),
           RaisedButton(
-              elevation: 7.0,
-              child: Text('Upload'),
-              textColor: Colors.white,
-              color: Colors.blue,
-              onPressed: () async {
-                if (barcode != null) {
-                  setState(() {
-                    barcodeResult = barcode.rawContent ?? 'none';
-                  });
-                }
-                final StorageReference firebaseStorageRef =
-                    FirebaseStorage.instance.ref().child(productname);
-                final StorageTaskSnapshot snapshot =
-                    await firebaseStorageRef.putFile(sampleImage).onComplete;
-                if (snapshot.error == null) {
-                  final String downloadUrl =
-                      await snapshot.ref.getDownloadURL();
-                  Firestore.instance.collection('products').add({
-                    "imageurl": downloadUrl,
-                    "productname": productname,
-                    'productprice': productprice,
-                    'isfavorite': isfavorite,
-                    'isfeatured': isfeatured,
-                    'supermarkert': selectedsupermarket,
-                    'category': selectedCategory,
-                    'productcode': barcodeResult,
-                    'productinfo': productinfo,
-                  });
-                }
-              }),
+            elevation: 7.0,
+            child: Text('Upload'),
+            textColor: Colors.white,
+            color: Colors.blue,
+            onPressed: () async {
+              if (barcode != null) {
+                setState(() {
+                  barcodeResult = barcode.rawContent ?? 'none';
+                });
+              }
+              final StorageReference firebaseStorageRef =
+                  FirebaseStorage.instance.ref().child(productname);
+              final StorageTaskSnapshot snapshot =
+                  await firebaseStorageRef.putFile(sampleImage).onComplete;
+              if (snapshot.error == null) {
+                final String downloadUrl = await snapshot.ref.getDownloadURL();
+                Firestore.instance.collection('products').add({
+                  "imageurl": downloadUrl,
+                  "productname": productname,
+                  'productprice': productprice,
+                  'isfavorite': isfavorite,
+                  'isfeatured': isfeatured,
+                  'supermarkert': selectedsupermarket,
+                  'category': selectedCategory,
+                  'productcode': barcodeResult,
+                  'productinfo': productinfo,
+                });
+              }
+            },
+          ),
         ],
       ),
     );

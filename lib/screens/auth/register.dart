@@ -1,5 +1,6 @@
 import 'package:churchpro/screens/loading.dart';
 import 'package:churchpro/services/auth/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -108,6 +109,13 @@ class _SignUpState extends State<SignUp> {
                                     dynamic result = await _auth
                                         .registerWithEmailAndPassword(
                                             email, password);
+                                    Firestore.instance.collection('users').add({
+                                      'username': 'scanPay',
+                                      'email': email,
+                                      'imageurl':
+                                          'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg',
+                                      'location': 'Nairobi',
+                                    });
                                     if (result == null) {
                                       setState(() {
                                         error = 'Enter a valid email';
