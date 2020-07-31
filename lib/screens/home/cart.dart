@@ -160,7 +160,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         mini: true,
                                         onPressed: () {},
                                         child: Center(
-                                            child: Icon(Icons.add,
+                                            child: Icon(Icons.remove,
                                                 color: Colors.white)),
                                         backgroundColor: Color(0xFFFE7D6A),
                                       )
