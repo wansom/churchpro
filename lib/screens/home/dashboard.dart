@@ -46,15 +46,16 @@ class _DashBoardState extends State<DashBoard> {
                 ),
                 title: Text('home')),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.shopping_basket,
-                ),
-                title: Text('Cart')),
+              icon: Icon(
+                Icons.explore,
+              ),
+              title: Text('Explore'),
+            ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.camera,
+                Icons.shopping_basket,
               ),
-              title: Text('Scan'),
+              title: Text('Cart'),
             ),
             BottomNavigationBarItem(
               icon: Icon(

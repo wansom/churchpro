@@ -53,6 +53,7 @@ class _AddProductsState extends State<AddProducts> {
     });
   }
 
+  String error = '';
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -63,185 +64,175 @@ class _AddProductsState extends State<AddProducts> {
   }
 
   Widget addProducts() {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
-    return Stack(
-      children: <Widget>[
-        Container(
-          height: 225.0,
-          color: Color(0xFF20D3D2),
-        ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: IconButton(
-                icon: Icon(Icons.arrow_back),
-                color: Colors.white,
-                onPressed: () {}),
-          ),
-        ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-              padding: const EdgeInsets.only(top: 40.0),
+    // final screenHeight = MediaQuery.of(context).size.height;
+    // final screenWidth = MediaQuery.of(context).size.width;
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+        Widget>[
+      Container(
+        child: Stack(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.fromLTRB(15.0, 100.0, 0.0, 0.0),
               child: Text(
                 'Add Product',
+                style: TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(260.0, 115.0, 0.0, 0.0),
+              child: Text(
+                '.',
                 style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              )),
+                    fontSize: 80.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green),
+              ),
+            )
+          ],
         ),
-        Positioned(
-          top: 100.0,
-          child: Container(
-            height: screenHeight - 100.0,
-            width: screenWidth,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.0),
-                    topRight: Radius.circular(40.0))),
-            child: ListView(
+      ),
+      Container(
+          padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+          child: Form(
+            key: _formkey,
+            child: Column(
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                TextFormField(
+                  validator: (value) =>
+                      value.isEmpty ? 'field is required' : null,
+                  onChanged: (val) {
+                    setState(() {
+                      productname = val;
+                    });
+                  },
+                  decoration: decoration,
+                ),
+                SizedBox(height: 10.0),
+                TextFormField(
+                  validator: (value) =>
+                      value.isEmpty ? 'field is required' : null,
+                  onChanged: (val) {
+                    setState(() {
+                      productinfo = val;
+                    });
+                  },
+                  decoration: decoration,
+                ),
+                TextFormField(
+                  validator: (value) =>
+                      value.isEmpty ? 'field is required' : null,
+                  onChanged: (val) {
+                    setState(() {
+                      productprice = val;
+                    });
+                  },
+                  decoration: decoration,
+                ),
+                DropdownButtonFormField(
+                  value: selectedsupermarket ?? 'naivas',
+                  decoration: decoration,
+                  items: listedsupermarkets.map((sugar) {
+                    return DropdownMenuItem(
+                      value: sugar,
+                      child: Text('$sugar supermarket'),
+                    );
+                  }).toList(),
+                  onChanged: (val) => setState(() => selectedsupermarket = val),
+                ),
+                SizedBox(height: 50.0),
+                DropdownButtonFormField(
+                  value: selectedCategory ?? 'electronics',
+                  decoration: decoration,
+                  items: myCategories.map((sugar) {
+                    return DropdownMenuItem(
+                      value: sugar,
+                      child: Text('$sugar Category'),
+                    );
+                  }).toList(),
+                  onChanged: (val) => setState(() => selectedCategory = val),
+                ),
+                SizedBox(height: 50.0),
+                Container(
+                    height: 40.0,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(20.0),
+                      shadowColor: Colors.greenAccent,
+                      color: Colors.green,
+                      elevation: 7.0,
+                      child: RaisedButton(
+                        onPressed: () async {
+                          if (_formkey.currentState.validate()) {
+                            scanMe();
+                          } else {}
+                        },
+                        child: Center(
+                          child: Text(
+                            'Scan Product',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat'),
+                          ),
+                        ),
+                      ),
+                    )),
+                SizedBox(height: 20.0),
+                Container(
+                  height: 40.0,
+                  color: Colors.transparent,
                   child: Container(
-                    width: screenWidth - 40.0,
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          height: screenHeight - 100,
-                          width: screenWidth,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            color: Color(0xFF20D3D2),
-                          ),
-                          child: ListView(
-                            children: <Widget>[
-                              Form(
-                                key: _formkey,
-                                child: Column(
-                                  children: <Widget>[
-                                    DropdownButtonFormField(
-                                      value: selectedsupermarket ?? 'naivas',
-                                      decoration: decoration,
-                                      items: listedsupermarkets.map((sugar) {
-                                        return DropdownMenuItem(
-                                          value: sugar,
-                                          child: Text('$sugar supermarket'),
-                                        );
-                                      }).toList(),
-                                      onChanged: (val) => setState(
-                                          () => selectedsupermarket = val),
-                                    ),
-                                    SizedBox(height: 10.0),
-                                    TextFormField(
-                                      decoration: decoration.copyWith(
-                                          labelText: 'product name'),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          productname = value;
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(height: 5.0),
-                                    TextFormField(
-                                      decoration: decoration.copyWith(
-                                          labelText: 'Price'),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          productprice = value;
-                                        });
-                                      },
-                                    ),
-                                    TextFormField(
-                                      decoration: decoration.copyWith(
-                                          labelText: 'Description'),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          productinfo = value;
-                                        });
-                                      },
-                                    ),
-                                    DropdownButtonFormField(
-                                      value: selectedCategory ?? 'electronics',
-                                      decoration: decoration,
-                                      items: myCategories.map((sugar) {
-                                        return DropdownMenuItem(
-                                          value: sugar,
-                                          child: Text('$sugar Category'),
-                                        );
-                                      }).toList(),
-                                      onChanged: (val) => setState(
-                                          () => selectedCategory = val),
-                                    ),
-                                    Container(
-                                        height: 40.0,
-                                        width: 105.0,
-                                        child: Material(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          shadowColor: Colors.greenAccent,
-                                          color: Colors.green,
-                                          elevation: 7.0,
-                                          child: GestureDetector(
-                                            onTap: scanMe,
-                                            child: Center(
-                                              child: Text(
-                                                'Scan Code',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: 'Montserrat',
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        )),
-                                    SizedBox(height: 5.0),
-                                    Container(
-                                        height: 40.0,
-                                        width: 105.0,
-                                        child: Material(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          shadowColor: Colors.greenAccent,
-                                          color: Colors.green,
-                                          elevation: 7.0,
-                                          child: GestureDetector(
-                                            onTap: getImage,
-                                            child: Center(
-                                              child: Text(
-                                                'Select Image',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: 'Montserrat',
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.black,
+                            style: BorderStyle.solid,
+                            width: 1.0),
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(20.0)),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: InkWell(
+                        onTap: getImage,
+                        child: Center(
+                          child: Text('select Image',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat')),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-        )
-      ],
-    );
+          )),
+      SizedBox(height: 5.0),
+      Text(
+        error,
+        style: TextStyle(color: Colors.red),
+      )
+      // Row(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: <Widget>[
+      //     Text(
+      //       'New to Spotify?',
+      //       style: TextStyle(
+      //         fontFamily: 'Montserrat',
+      //       ),
+      //     ),
+      //     SizedBox(width: 5.0),
+      //     InkWell(
+      //       child: Text('Register',
+      //           style: TextStyle(
+      //               color: Colors.green,
+      //               fontFamily: 'Montserrat',
+      //               fontWeight: FontWeight.bold,
+      //               decoration: TextDecoration.underline)),
+      //     )
+      //   ],
+      // )
+    ]);
   }
 
   Widget enableUpload() {

@@ -103,8 +103,8 @@ class _SignUpState extends State<SignUp> {
                               shadowColor: Colors.greenAccent,
                               color: Colors.green,
                               elevation: 7.0,
-                              child: GestureDetector(
-                                onTap: () async {
+                              child: RaisedButton(
+                                onPressed: () async {
                                   if (_formKey.currentState.validate()) {
                                     dynamic result = await _auth
                                         .registerWithEmailAndPassword(

@@ -127,8 +127,8 @@ class _SignInState extends State<SignIn> {
                                     shadowColor: Colors.greenAccent,
                                     color: Colors.green,
                                     elevation: 7.0,
-                                    child: GestureDetector(
-                                      onTap: () async {
+                                    child: RaisedButton(
+                                      onPressed: () async {
                                         if (_formKey.currentState.validate()) {
                                           loading = true;
                                           dynamic result =
