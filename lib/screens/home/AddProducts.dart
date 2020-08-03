@@ -66,134 +66,130 @@ class _AddProductsState extends State<AddProducts> {
   Widget addProducts() {
     // final screenHeight = MediaQuery.of(context).size.height;
     // final screenWidth = MediaQuery.of(context).size.width;
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
-        Widget>[
-      Container(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.fromLTRB(15.0, 100.0, 0.0, 0.0),
-              child: Text(
-                'Add Product',
-                style: TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold),
+    return SingleChildScrollView(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+          Widget>[
+        Container(
+          child: Stack(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(15.0, 30.0, 0.0, 0.0),
+                child: Text(
+                  'Add Product',
+                  style: TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(260.0, 115.0, 0.0, 0.0),
-              child: Text(
-                '.',
-                style: TextStyle(
-                    fontSize: 80.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green),
-              ),
-            )
-          ],
+              Container(
+                padding: EdgeInsets.fromLTRB(285.0, 115.0, 0.0, 0.0),
+                child: Text(
+                  '.',
+                  style: TextStyle(
+                      fontSize: 80.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
-      Container(
-          padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-          child: Form(
-            key: _formkey,
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  validator: (value) =>
-                      value.isEmpty ? 'field is required' : null,
-                  onChanged: (val) {
-                    setState(() {
-                      productname = val;
-                    });
-                  },
-                  decoration: decoration,
-                ),
-                SizedBox(height: 10.0),
-                TextFormField(
-                  validator: (value) =>
-                      value.isEmpty ? 'field is required' : null,
-                  onChanged: (val) {
-                    setState(() {
-                      productinfo = val;
-                    });
-                  },
-                  decoration: decoration,
-                ),
-                TextFormField(
-                  validator: (value) =>
-                      value.isEmpty ? 'field is required' : null,
-                  onChanged: (val) {
-                    setState(() {
-                      productprice = val;
-                    });
-                  },
-                  decoration: decoration,
-                ),
-                DropdownButtonFormField(
-                  value: selectedsupermarket ?? 'naivas',
-                  decoration: decoration,
-                  items: listedsupermarkets.map((sugar) {
-                    return DropdownMenuItem(
-                      value: sugar,
-                      child: Text('$sugar supermarket'),
-                    );
-                  }).toList(),
-                  onChanged: (val) => setState(() => selectedsupermarket = val),
-                ),
-                SizedBox(height: 50.0),
-                DropdownButtonFormField(
-                  value: selectedCategory ?? 'electronics',
-                  decoration: decoration,
-                  items: myCategories.map((sugar) {
-                    return DropdownMenuItem(
-                      value: sugar,
-                      child: Text('$sugar Category'),
-                    );
-                  }).toList(),
-                  onChanged: (val) => setState(() => selectedCategory = val),
-                ),
-                SizedBox(height: 50.0),
-                Container(
+        Container(
+            padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+            child: Form(
+              key: _formkey,
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'field is required' : null,
+                    onChanged: (val) {
+                      setState(() {
+                        productname = val;
+                      });
+                    },
+                    decoration: decoration.copyWith(labelText: 'product Name'),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'field is required' : null,
+                    onChanged: (val) {
+                      setState(() {
+                        productinfo = val;
+                      });
+                    },
+                    decoration: decoration.copyWith(labelText: 'Description'),
+                  ),
+                  TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'field is required' : null,
+                    onChanged: (val) {
+                      setState(() {
+                        productprice = val;
+                      });
+                    },
+                    decoration: decoration.copyWith(labelText: 'Price'),
+                  ),
+                  DropdownButtonFormField(
+                    value: selectedsupermarket ?? 'naivas',
+                    decoration: decoration.copyWith(labelText: 'Supermarket '),
+                    items: listedsupermarkets.map((sugar) {
+                      return DropdownMenuItem(
+                        value: sugar,
+                        child: Text('$sugar supermarket'),
+                      );
+                    }).toList(),
+                    onChanged: (val) =>
+                        setState(() => selectedsupermarket = val),
+                  ),
+                  SizedBox(height: 50.0),
+                  DropdownButtonFormField(
+                    value: selectedCategory ?? 'electronics',
+                    decoration: decoration.copyWith(labelText: 'Category '),
+                    items: myCategories.map((sugar) {
+                      return DropdownMenuItem(
+                        value: sugar,
+                        child: Text('$sugar Category'),
+                      );
+                    }).toList(),
+                    onChanged: (val) => setState(() => selectedCategory = val),
+                  ),
+                  SizedBox(height: 50.0),
+                  Container(
                     height: 40.0,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.greenAccent,
-                      color: Colors.green,
-                      elevation: 7.0,
-                      child: RaisedButton(
-                        onPressed: () async {
-                          if (_formkey.currentState.validate()) {
-                            scanMe();
-                          } else {}
-                        },
+                    color: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.black,
+                              style: BorderStyle.solid,
+                              width: 1.0),
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(20.0)),
+                      child: FlatButton(
+                        onPressed: scanMe,
                         child: Center(
-                          child: Text(
-                            'Scan Product',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Montserrat'),
-                          ),
+                          child: Text('Scan product',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat')),
                         ),
                       ),
-                    )),
-                SizedBox(height: 20.0),
-                Container(
-                  height: 40.0,
-                  color: Colors.transparent,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.black,
-                            style: BorderStyle.solid,
-                            width: 1.0),
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(20.0)),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: InkWell(
-                        onTap: getImage,
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                  Container(
+                    height: 40.0,
+                    color: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.black,
+                              style: BorderStyle.solid,
+                              width: 1.0),
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(20.0)),
+                      child: FlatButton(
+                        onPressed: getImage,
                         child: Center(
                           child: Text('select Image',
                               style: TextStyle(
@@ -203,36 +199,16 @@ class _AddProductsState extends State<AddProducts> {
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          )),
-      SizedBox(height: 5.0),
-      Text(
-        error,
-        style: TextStyle(color: Colors.red),
-      )
-      // Row(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: <Widget>[
-      //     Text(
-      //       'New to Spotify?',
-      //       style: TextStyle(
-      //         fontFamily: 'Montserrat',
-      //       ),
-      //     ),
-      //     SizedBox(width: 5.0),
-      //     InkWell(
-      //       child: Text('Register',
-      //           style: TextStyle(
-      //               color: Colors.green,
-      //               fontFamily: 'Montserrat',
-      //               fontWeight: FontWeight.bold,
-      //               decoration: TextDecoration.underline)),
-      //     )
-      //   ],
-      // )
-    ]);
+                ],
+              ),
+            )),
+        SizedBox(height: 5.0),
+        Text(
+          error,
+          style: TextStyle(color: Colors.red),
+        )
+      ]),
+    );
   }
 
   Widget enableUpload() {

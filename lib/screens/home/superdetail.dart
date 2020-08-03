@@ -4,6 +4,7 @@ import 'package:churchpro/screens/home/tabs/food.dart';
 import 'package:churchpro/screens/home/tabs/furniture.dart';
 import 'package:flutter/material.dart';
 import 'package:churchpro/modals/products.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SuperDetail extends StatefulWidget {
   @override
@@ -27,33 +28,29 @@ class _SuperDetailState extends State<SuperDetail>
   Widget build(BuildContext context) {
     selectedProduct = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFFFE7D6A)),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(selectedProduct['selectedName'],
-            style: TextStyle(
-                fontFamily: 'Varela',
-                fontSize: 20.0,
-                color: Color(0xFF545D68))),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications_none, color: Color(0xFFFE7D6A)),
-            onPressed: () {},
-          ),
-        ],
-      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.only(left: 20.0),
           children: <Widget>[
-            SizedBox(height: 15.0),
+            SizedBox(height: 50.0),
+            Padding(
+              padding: EdgeInsets.only(left: 0.0, right: 15.0),
+              child: Container(
+                padding: EdgeInsets.only(left: 5.0),
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: TextField(
+                  decoration: InputDecoration(
+                      hintText: selectedProduct['selectedName'],
+                      hintStyle: GoogleFonts.notoSans(fontSize: 14.0),
+                      border: InputBorder.none,
+                      fillColor: Colors.grey.withOpacity(0.5),
+                      prefixIcon: Icon(Icons.search, color: Colors.grey)),
+                ),
+              ),
+            ),
+            SizedBox(height: 20.0),
             Text('Categories',
                 style: TextStyle(
                     fontFamily: 'Varela',

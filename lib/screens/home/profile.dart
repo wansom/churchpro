@@ -19,30 +19,13 @@ class _ProfilePageState extends State<ProfilePage> {
         body: Stack(
       children: <Widget>[
         Container(
-          height: 225.0,
-          color: Color(0xFF20D3D2),
-        ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: IconButton(
-              icon: Icon(Icons.person_outline),
-              color: Colors.white,
-              onPressed: () {},
-            ),
-          ),
+          height: 285.0,
+          color: Colors.green,
         ),
         Align(
           alignment: Alignment.topLeft,
           child: Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: IconButton(
-              icon: Icon(Icons.arrow_back),
-              color: Colors.white,
-              onPressed: () {},
-            ),
-          ),
+              padding: const EdgeInsets.only(top: 30.0), child: Container()),
         ),
         Positioned(
           top: MediaQuery.of(context).size.height / 9,
@@ -85,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             children: <Widget>[
                               SizedBox(height: 5.0),
                               Text(
-                                'ScanPay User',
+                                ' User',
                                 style: TextStyle(
                                     fontSize: 30.0,
                                     fontWeight: FontWeight.bold,
@@ -101,54 +84,53 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               SizedBox(height: 25.0),
                               Container(
-                                  height: 60.0,
-                                  width: 205.0,
-                                  child: Material(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    shadowColor: Colors.greenAccent,
-                                    color: Colors.green,
-                                    elevation: 7.0,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                            context, '/updateprofile');
-                                      },
-                                      child: Center(
-                                        child: Text(
-                                          'Edit Profile',
+                                height: 40.0,
+                                color: Colors.transparent,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.green,
+                                          style: BorderStyle.solid,
+                                          width: 1.0),
+                                      color: Colors.transparent,
+                                      borderRadius:
+                                          BorderRadius.circular(20.0)),
+                                  child: FlatButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, '/updateprofile');
+                                    },
+                                    child: Center(
+                                      child: Text('Edit Profile ',
                                           style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'Montserrat',
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 24.0),
-                                        ),
-                                      ),
+                                              fontFamily: 'Montserrat')),
                                     ),
-                                  )),
-                              SizedBox(
-                                height: 15.0,
+                                  ),
+                                ),
                               ),
+                              SizedBox(height: 20.0),
                               Container(
-                                height: 60.0,
-                                width: 205.0,
-                                child: Material(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  shadowColor: Colors.redAccent,
-                                  color: Colors.red,
-                                  elevation: 7.0,
-                                  child: GestureDetector(
-                                    onTap: () {
+                                height: 40.0,
+                                color: Colors.transparent,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.red,
+                                          style: BorderStyle.solid,
+                                          width: 1.0),
+                                      color: Colors.transparent,
+                                      borderRadius:
+                                          BorderRadius.circular(20.0)),
+                                  child: FlatButton(
+                                    onPressed: () {
                                       _auth.signOut();
                                     },
                                     child: Center(
-                                      child: Text(
-                                        'Log out',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'Montserrat',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 24.0),
-                                      ),
+                                      child: Text('Sign Out',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Montserrat')),
                                     ),
                                   ),
                                 ),

@@ -127,10 +127,12 @@ class _SignInState extends State<SignIn> {
                                     shadowColor: Colors.greenAccent,
                                     color: Colors.green,
                                     elevation: 7.0,
-                                    child: RaisedButton(
+                                    child: FlatButton(
                                       onPressed: () async {
                                         if (_formKey.currentState.validate()) {
-                                          loading = true;
+                                          setState(() {
+                                            loading = true;
+                                          });
                                           dynamic result =
                                               _auth.signinWithEmailAndPassword(
                                                   email, password);
