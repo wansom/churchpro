@@ -1,6 +1,6 @@
+import 'package:churchpro/screens/home/AddProducts.dart';
 import 'package:churchpro/screens/home/cart.dart';
 import 'package:churchpro/screens/home/home.dart';
-import 'package:churchpro/screens/home/mlkit.dart';
 import 'package:churchpro/screens/home/profile.dart';
 import 'package:churchpro/screens/home/scan.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,7 +20,7 @@ class _DashBoardState extends State<DashBoard> {
     ShoppingCart(),
     ScanProduct(),
     ProfilePage(),
-    BarcodeScan()
+    AddProducts(),
   ];
 
   @override

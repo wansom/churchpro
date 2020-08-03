@@ -41,7 +41,7 @@ dependencies:
   google_fonts: ^1.1.0
   smooth_star_rating: ^1.1.1
   introduction_screen: ^1.0.9
-  firebase_ml_vision:
+ 
   
 
 dev_dependencies:
