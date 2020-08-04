@@ -12,7 +12,7 @@ class ScanProduct extends StatefulWidget {
 }
 
 class _ScanProductState extends State<ScanProduct> {
-  var resultName = 'Please refresh & scan again';
+  var resultName = '';
   var resultCode = '03600291452';
   var resultPrice = '0';
   var resultInfo = 'No products match the code scanned';
@@ -339,31 +339,32 @@ class _ScanProductState extends State<ScanProduct> {
     return Stack(
       children: <Widget>[
         Container(
-          height: 225.0,
-          color: Color(0xFF20D3D2),
-        ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: IconButton(
-              icon: Icon(Icons.refresh),
-              iconSize: 50.0,
-              color: Colors.white,
-              onPressed: toggleView,
+          height: screenHeight,
+          // color: Color(0xFF20D3D2),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40.0),
+              topRight: Radius.circular(40.0),
             ),
+          ),
+          child: Image.asset(
+            'assets/shop2.jpg',
+            fit: BoxFit.contain,
           ),
         ),
         Positioned(
-          top: 190.0,
+          top: 300.0,
           child: Container(
-            height: screenHeight - 190.0,
+            height: 300.0,
             width: screenWidth,
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.0),
-                    topRight: Radius.circular(40.0))),
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40.0),
+                topRight: Radius.circular(40.0),
+              ),
+            ),
             child: ListView(
               children: <Widget>[
                 Padding(

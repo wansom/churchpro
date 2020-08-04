@@ -46,7 +46,7 @@ class _SuperListState extends State<SuperList> {
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(15.0),
-                                        color: Color(0xFFC2E3FE)),
+                                        color: Colors.green),
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
