@@ -260,6 +260,7 @@ class _ScanProductState extends State<ScanProduct> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           child: notScanned ? myText() : noScanResult(),
@@ -348,74 +349,122 @@ class _ScanProductState extends State<ScanProduct> {
               topRight: Radius.circular(40.0),
             ),
           ),
-          child: Image.asset(
-            'assets/shop2.jpg',
-            fit: BoxFit.contain,
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 50.0),
+                child: Image.asset(
+                  'assets/shop2.jpg',
+                  fit: BoxFit.contain,
+                ),
+              ),
+              Positioned(
+                top: 200.0,
+                child: Container(
+                  height: screenHeight - 250.0,
+                  width: screenWidth,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15.0, 100.0, 0.0, 0.0),
+                        child: Text(
+                          'Scanpay',
+                          style: TextStyle(
+                              fontSize: 70.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(260.0, 110.0, 0.0, 0.0),
+                        child: Text(
+                          '.',
+                          style: TextStyle(
+                              fontSize: 80.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         Positioned(
-          top: 300.0,
-          child: Container(
-            height: 300.0,
-            width: screenWidth,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
+          top: 350.0,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              right: 15.0,
+              left: 60.0,
             ),
-            child: ListView(
+            child: Column(
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: 30.0, left: 20.0, right: 20.0, bottom: 10.0),
-                  child: Container(
-                    width: screenWidth - 40.0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        InkWell(
-                          onTap: scanMe,
-                          child: Container(
-                            height: 80.0,
-                            width: 150.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.0),
-                              color: Color(0xFF20D3D2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Scan',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 24.0,
-                                    color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                SizedBox(height: 50.0),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.green,
+                        style: BorderStyle.solid,
+                        width: 5.0),
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: 20.0, right: 20.0, bottom: 10.0, top: 5.0),
-                  child: Text(
-                    'Click the refresh button to see Item details',
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16.0,
-                        color: Color(0xFFBBBBBB)),
+                  height: 60.0,
+                  width: screenWidth / 2,
+                  child: Material(
+                    borderRadius: BorderRadius.circular(20.0),
+                    shadowColor: Colors.greenAccent,
+                    color: Colors.transparent,
+                    elevation: 7.0,
+                    child: FlatButton(
+                      onPressed: scanMe,
+                      child: Center(
+                        child: Text(
+                          'SCAN',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24.0,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-        )
+        ),
+
+        // Positioned(
+        //   top: 250.0,
+        //   child: Container(
+        //     height: screenHeight - 250.0,
+        //     width: screenWidth,
+        //     child: Stack(
+        //       children: <Widget>[
+        //         Container(
+        //           padding: EdgeInsets.fromLTRB(15.0, 100.0, 0.0, 0.0),
+        //           child: Text(
+        //             'Scanpay',
+        //             style:
+        //                 TextStyle(fontSize: 70.0, fontWeight: FontWeight.bold),
+        //           ),
+        //         ),
+        //         Container(
+        //           padding: EdgeInsets.fromLTRB(260.0, 115.0, 0.0, 0.0),
+        //           child: Text(
+        //             '.',
+        //             style: TextStyle(
+        //                 fontSize: 80.0,
+        //                 fontWeight: FontWeight.bold,
+        //                 color: Colors.green),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

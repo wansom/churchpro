@@ -41,7 +41,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           title: "Welcome to ScanPay",
           body:
               "Avoid long Queues,Scan products via our app and pay using Mpesa",
-          image: _buildImage('screen1'),
+          image: _buildImage('178'),
           decoration: pageDecoration,
         ),
         PageViewModel(

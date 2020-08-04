@@ -47,7 +47,7 @@ class _SignUpState extends State<SignUp> {
                               fontWeight: FontWeight.bold,
                               color: Colors.green),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

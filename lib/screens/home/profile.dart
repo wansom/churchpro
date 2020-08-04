@@ -115,13 +115,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                 color: Colors.transparent,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.red,
-                                          style: BorderStyle.solid,
-                                          width: 1.0),
-                                      color: Colors.transparent,
-                                      borderRadius:
-                                          BorderRadius.circular(20.0)),
+                                    border: Border.all(
+                                        color: Colors.red,
+                                        style: BorderStyle.solid,
+                                        width: 1.0),
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
                                   child: FlatButton(
                                     onPressed: () {
                                       _auth.signOut();

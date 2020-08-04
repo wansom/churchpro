@@ -16,9 +16,9 @@ class _DashBoardState extends State<DashBoard> {
   //default index of first screen
   int _currentIndex = 0;
   List<Widget> myPages = [
+    ScanProduct(),
     HomePage(),
     ShoppingCart(),
-    ScanProduct(),
     ProfilePage(),
     AddProducts(),
   ];
