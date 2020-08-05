@@ -142,7 +142,7 @@ class _ScanProductState extends State<ScanProduct> {
                           borderRadius: BorderRadius.circular(15.0),
                           boxShadow: [
                             BoxShadow(
-                                color: Color(0xFFFE7D6A).withOpacity(0.1),
+                                color: Colors.green.withOpacity(0.1),
                                 blurRadius: 6.0,
                                 spreadRadius: 6.0,
                                 offset: Offset(5.0, 11.0)),
@@ -160,7 +160,7 @@ class _ScanProductState extends State<ScanProduct> {
                           ),
                           child: Center(
                             child: Icon(Icons.restore,
-                                color: Color(0xFFFE7D6A), size: 25.0),
+                                color: Colors.green, size: 25.0),
                           ),
                         ),
                       ),
@@ -180,14 +180,14 @@ class _ScanProductState extends State<ScanProduct> {
                     '\$' + (int.parse(resultPrice) * quantity).toString(),
                     style: GoogleFonts.notoSans(
                         fontSize: 30.0,
-                        color: Color(0xFF5E6166),
+                        color: Colors.green,
                         fontWeight: FontWeight.w500),
                   ))),
               Container(
                   height: 60.0,
                   width: MediaQuery.of(context).size.width * (67 / 100),
                   decoration: BoxDecoration(
-                      color: Color(0xFFFE7D6A),
+                      color: Colors.green,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10.0),
                           bottomLeft: Radius.circular(10.0))),
@@ -405,7 +405,7 @@ class _ScanProductState extends State<ScanProduct> {
                     border: Border.all(
                         color: Colors.green,
                         style: BorderStyle.solid,
-                        width: 5.0),
+                        width: 2.0),
                     color: Colors.transparent,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -413,7 +413,7 @@ class _ScanProductState extends State<ScanProduct> {
                   width: screenWidth / 2,
                   child: Material(
                     borderRadius: BorderRadius.circular(20.0),
-                    shadowColor: Colors.greenAccent,
+                    //shadowColor: Colors.green,
                     color: Colors.transparent,
                     elevation: 7.0,
                     child: FlatButton(
@@ -435,36 +435,6 @@ class _ScanProductState extends State<ScanProduct> {
             ),
           ),
         ),
-
-        // Positioned(
-        //   top: 250.0,
-        //   child: Container(
-        //     height: screenHeight - 250.0,
-        //     width: screenWidth,
-        //     child: Stack(
-        //       children: <Widget>[
-        //         Container(
-        //           padding: EdgeInsets.fromLTRB(15.0, 100.0, 0.0, 0.0),
-        //           child: Text(
-        //             'Scanpay',
-        //             style:
-        //                 TextStyle(fontSize: 70.0, fontWeight: FontWeight.bold),
-        //           ),
-        //         ),
-        //         Container(
-        //           padding: EdgeInsets.fromLTRB(260.0, 115.0, 0.0, 0.0),
-        //           child: Text(
-        //             '.',
-        //             style: TextStyle(
-        //                 fontSize: 80.0,
-        //                 fontWeight: FontWeight.bold,
-        //                 color: Colors.green),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }

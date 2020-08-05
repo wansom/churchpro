@@ -5,9 +5,16 @@ import 'package:churchpro/screens/home/superdetail.dart';
 import 'package:churchpro/services/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  /*Set Consumer credentials before initializing the payment.
+    You can get  them from https://developer.safaricom.co.ke/ by creating
+    an account and an app.
+     */
+  MpesaFlutterPlugin.setConsumerKey("Znta2q3LCscb9grTZ7p0CIbc1dJIfTTl");
+  MpesaFlutterPlugin.setConsumerSecret("VC0RP4OVeD4tR70H");
   runApp(MyApp());
 }
 

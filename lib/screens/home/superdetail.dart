@@ -60,10 +60,10 @@ class _SuperDetailState extends State<SuperDetail>
             TabBar(
                 controller: _tabController,
                 indicatorColor: Colors.transparent,
-                labelColor: Color(0xFFFE7D6A),
+                labelColor: Colors.green,
                 isScrollable: true,
                 labelPadding: EdgeInsets.only(right: 45.0),
-                unselectedLabelColor: Color(0xFFFE7D6A),
+                unselectedLabelColor: Colors.green,
                 tabs: [
                   Tab(
                     child: Text('Electronics',

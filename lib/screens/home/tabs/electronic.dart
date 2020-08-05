@@ -63,9 +63,9 @@ class _ElectronicsState extends State<Electronics> {
                                           children: [
                                             products['isfavorite']
                                                 ? Icon(Icons.favorite,
-                                                    color: Color(0xFFFE7D6A))
+                                                    color: Colors.green)
                                                 : Icon(Icons.favorite_border,
-                                                    color: Color(0xFFFE7D6A))
+                                                    color: Colors.green)
                                           ])),
                                   Container(
                                       height: 38.0,
@@ -84,8 +84,7 @@ class _ElectronicsState extends State<Electronics> {
                                   Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Container(
-                                          color: Color(0xFFEBEBEB),
-                                          height: 1.0)),
+                                          color: Colors.green, height: 1.0)),
                                   Padding(
                                       padding: EdgeInsets.only(
                                           left: 5.0, right: 5.0),
@@ -95,27 +94,27 @@ class _ElectronicsState extends State<Electronics> {
                                           children: [
                                             if (!products['isfeatured']) ...[
                                               Icon(Icons.shopping_basket,
-                                                  color: Color(0xFFD17E50),
+                                                  color: Colors.green,
                                                   size: 12.0),
                                               Text('View Details',
                                                   style: TextStyle(
                                                       fontFamily: 'Varela',
-                                                      color: Color(0xFFFE7D6A),
+                                                      color: Colors.green,
                                                       fontSize: 12.0))
                                             ],
                                             if (products['isfeatured']) ...[
                                               Icon(Icons.remove_circle_outline,
-                                                  color: Color(0xFFFE7D6A),
+                                                  color: Colors.green,
                                                   size: 12.0),
                                               Text('3',
                                                   style: TextStyle(
                                                       fontFamily: 'Varela',
-                                                      color: Color(0xFFD17E50),
+                                                      color: Colors.green,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 12.0)),
                                               Icon(Icons.add_circle_outline,
-                                                  color: Color(0xFFFE7D6A),
+                                                  color: Colors.green,
                                                   size: 12.0),
                                             ]
                                           ]))
