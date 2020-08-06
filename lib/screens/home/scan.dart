@@ -401,32 +401,23 @@ class _ScanProductState extends State<ScanProduct> {
               children: <Widget>[
                 SizedBox(height: 50.0),
                 Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.green,
-                        style: BorderStyle.solid,
-                        width: 2.0),
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  height: 60.0,
-                  width: screenWidth / 2,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(20.0),
-                    //shadowColor: Colors.green,
-                    color: Colors.transparent,
-                    elevation: 7.0,
+                  height: 40.0,
+                  color: Colors.transparent,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.green,
+                            style: BorderStyle.solid,
+                            width: 1.0),
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(20.0)),
                     child: FlatButton(
                       onPressed: scanMe,
                       child: Center(
-                        child: Text(
-                          'SCAN',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
-                          ),
-                        ),
+                        child: Text('SCAN ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat')),
                       ),
                     ),
                   ),
