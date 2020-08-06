@@ -1,6 +1,5 @@
 import 'package:churchpro/screens/home/AddProducts.dart';
 import 'package:churchpro/screens/home/cart.dart';
-import 'package:churchpro/screens/home/home.dart';
 import 'package:churchpro/screens/home/profile.dart';
 import 'package:churchpro/screens/home/scan.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,7 +16,6 @@ class _DashBoardState extends State<DashBoard> {
   int _currentIndex = 0;
   List<Widget> myPages = [
     ScanProduct(),
-    HomePage(),
     ShoppingCart(),
     ProfilePage(),
     AddProducts(),
@@ -45,12 +43,6 @@ class _DashBoardState extends State<DashBoard> {
                   Icons.home,
                 ),
                 title: Text('home')),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.explore,
-              ),
-              title: Text('Explore'),
-            ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.shopping_basket,
