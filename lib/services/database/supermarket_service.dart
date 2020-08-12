@@ -1,5 +1,5 @@
-import 'package:churchpro/modals/supermarkets_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:scanpay/modals/supermarkets_model.dart';
 
 class SuperService {
   CollectionReference superCollection =

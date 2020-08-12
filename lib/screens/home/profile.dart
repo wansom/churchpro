@@ -1,7 +1,8 @@
-import 'package:churchpro/services/auth/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scanpay/services/auth/auth_service.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -16,56 +17,173 @@ class _ProfilePageState extends State<ProfilePage> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        Container(
-          height: 285.0,
-          color: Colors.green,
-        ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-              padding: const EdgeInsets.only(top: 30.0), child: Container()),
-        ),
-        Positioned(
-          top: MediaQuery.of(context).size.height / 9,
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: 150.0,
-                height: 150.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'),
-                      fit: BoxFit.cover),
-                  borderRadius: BorderRadius.all(Radius.circular(75.0)),
-                  boxShadow: [
-                    BoxShadow(blurRadius: 7.0, color: Colors.black),
-                  ],
-                ),
-              ),
-              Positioned(
-                top: 190.0,
-                child: Container(
-                  height: screenHeight - 190.0,
-                  width: screenWidth,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40.0),
-                          topRight: Radius.circular(40.0))),
-                  child: ListView(
+        body: SafeArea(
+      child: SingleChildScrollView(
+        child: Container(
+          height: screenHeight,
+          width: screenWidth,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: StreamBuilder<QuerySnapshot>(
+              stream: Firestore.instance
+                  .collection('users')
+                  .where('uid', isEqualTo: user.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  var mySnapshot = snapshot.data;
+                  return ListView.builder(
+                    itemCount: mySnapshot.documents.length,
+                    itemBuilder: (context, index) {
+                      DocumentSnapshot products = mySnapshot.documents[index];
+                      return Column(
+                        children: <Widget>[
+                          Container(
+                            width: screenWidth,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 40.0),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 30.0,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Container(
+                                      width: 150.0,
+                                      height: 150.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        image: DecorationImage(
+                                            image: NetworkImage(products[
+                                                    'imageurl'] ??
+                                                'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'),
+                                            fit: BoxFit.cover),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(75.0)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 7.0,
+                                              color: Colors.black),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.0),
+                                  Text(
+                                    products['username'] ?? 'User',
+                                    style: TextStyle(
+                                        fontSize: 30.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Montserrat'),
+                                  ),
+                                  SizedBox(height: 15.0),
+                                  Text(
+                                    products['email'] ?? 'user@scanpay.com',
+                                    style: TextStyle(
+                                        fontSize: 17.0,
+                                        fontStyle: FontStyle.italic,
+                                        fontFamily: 'Montserrat'),
+                                  ),
+                                  SizedBox(height: 25.0),
+                                  Container(
+                                    height: 40.0,
+                                    color: Colors.transparent,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.green,
+                                              style: BorderStyle.solid,
+                                              width: 1.0),
+                                          color: Colors.transparent,
+                                          borderRadius:
+                                              BorderRadius.circular(20.0)),
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, '/updateprofile');
+                                        },
+                                        child: Center(
+                                          child: Text('Edit Profile ',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontFamily: 'Montserrat')),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 20.0),
+                                  Container(
+                                    height: 40.0,
+                                    color: Colors.transparent,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.red,
+                                            style: BorderStyle.solid,
+                                            width: 1.0),
+                                        color: Colors.transparent,
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          _auth.signOut();
+                                        },
+                                        child: Center(
+                                          child: Text('Sign Out',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontFamily: 'Montserrat')),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  return ListView(
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(
-                            top: 30.0, left: 20.0, right: 20.0, bottom: 10.0),
-                        child: Container(
-                          width: screenWidth,
+                      Container(
+                        width: screenWidth,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
+                              SizedBox(
+                                height: 30.0,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Container(
+                                  width: 150.0,
+                                  height: 150.0,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'),
+                                        fit: BoxFit.cover),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(75.0)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          blurRadius: 7.0, color: Colors.black),
+                                    ],
+                                  ),
+                                ),
+                              ),
                               SizedBox(height: 5.0),
                               Text(
                                 ' User',
@@ -140,13 +258,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        )
-      ],
+                  );
+                }
+              }),
+        ),
+      ),
     ));
     //     body: new Stack(
     //   children: <Widget>[

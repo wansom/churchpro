@@ -1,4 +1,4 @@
-import 'package:churchpro/modals/products.dart';
+import 'package:scanpay/modals/products.dart';
 
 class Supermarkets {
   String superName;

@@ -1,6 +1,6 @@
-import 'package:churchpro/modals/products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:scanpay/modals/products.dart';
 
 class ProductService {
   //get current user

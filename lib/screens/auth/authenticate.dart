@@ -1,6 +1,6 @@
-import 'package:churchpro/screens/auth/register.dart';
-import 'package:churchpro/screens/auth/signin.dart';
 import 'package:flutter/material.dart';
+import 'package:scanpay/screens/auth/register.dart';
+import 'package:scanpay/screens/auth/signin.dart';
 
 class Authenticate extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
-import 'package:churchpro/screens/auth/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:scanpay/screens/auth/authenticate.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   Widget _buildImage(String assetName) {
     return Align(
-      child: Image.asset('assets/$assetName.jpg', width: 350.0),
+      child: Image.asset('assets/$assetName.png', width: 350.0),
       alignment: Alignment.bottomCenter,
     );
   }
@@ -41,21 +41,21 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           title: "Welcome to ScanPay",
           body:
               "Avoid long Queues,Scan products via our app and pay using Mpesa",
-          image: _buildImage('178'),
+          image: _buildImage('home1'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Make the scan",
           body:
               "Scan any product from the shelf and it will be added to your cart.Changed your mind?just rescan",
-          image: _buildImage('screen2'),
+          image: _buildImage('2'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Digital payments",
           body:
               "Pay for items in your cart using Mpesa or shopping card.Your digital receipt will be processed instantly",
-          image: _buildImage('screen3'),
+          image: _buildImage('3'),
           decoration: pageDecoration,
         ),
         PageViewModel(
@@ -68,7 +68,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               Text(" GO", style: bodyStyle),
             ],
           ),
-          image: _buildImage('shop2'),
+          image: _buildImage('home2'),
           decoration: pageDecoration,
         ),
       ],

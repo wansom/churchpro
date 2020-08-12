@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:churchpro/shared/constansts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:scanpay/shared/constansts.dart';
 
 class UpdateProfile extends StatefulWidget {
   @override
@@ -84,7 +84,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           useremail = val;
                         });
                       },
-                      decoration: decoration.copyWith(labelText: 'Description'),
+                      decoration: decoration.copyWith(labelText: 'Email'),
                     ),
                     TextFormField(
                       validator: (value) =>
@@ -152,7 +152,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 'email': useremail,
                                 'imageurl': downloadUrl,
                                 'location': location,
-                              });
+                              }, merge: true);
                               Navigator.pop(context);
                             }
                           },

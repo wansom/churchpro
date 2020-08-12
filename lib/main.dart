@@ -1,11 +1,11 @@
-import 'package:churchpro/app.dart';
-import 'package:churchpro/screens/auth/update_profile.dart';
-
-import 'package:churchpro/services/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
 import 'package:provider/provider.dart';
+import 'package:scanpay/app.dart';
+import 'package:scanpay/screens/auth/update_profile.dart';
+import 'package:scanpay/screens/home/scan.dart';
+import 'package:scanpay/services/auth/auth_service.dart';
 
 void main() {
   /*Set Consumer credentials before initializing the payment.
@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => MyHomePage(),
           '/updateprofile': (context) => UpdateProfile(),
+          '/scan': (context) => ScanProduct(),
         },
       ),
     );

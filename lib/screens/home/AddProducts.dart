@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:churchpro/shared/constansts.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:scanpay/shared/constansts.dart';
 
 class AddProducts extends StatefulWidget {
   @override
@@ -58,7 +59,9 @@ class _AddProductsState extends State<AddProducts> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new SafeArea(
-        child: sampleImage == null ? addProducts() : enableUpload(),
+        child: SingleChildScrollView(
+          child: sampleImage == null ? addProducts() : enableUpload(),
+        ),
       ),
     );
   }
